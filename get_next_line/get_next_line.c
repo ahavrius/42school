@@ -6,12 +6,11 @@
 /*   By: ahavrius <ahavrius@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/02 14:58:02 by ahavrius          #+#    #+#             */
-/*   Updated: 2018/11/02 15:04:49 by ahavrius         ###   ########.fr       */
+/*   Updated: 2018/11/04 18:30:48 by ahavrius         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include "libft.h"
 
 static void	ft_search_swap(t_list **head, int fd)
 {
@@ -48,11 +47,11 @@ static int	ft_readwrite(t_list *head, const int fd, int *i)
 
 	read_size = read(fd, buff, BUFF_SIZE);
 	(*i) += (read_size > 0);
-	if (read_size == 0)
-		return (0);
+	if (read_size <= 0)
+		return (read_size);
 	buff[read_size] = '\0';
 	cur_size = ft_strlen(((t_buff *)head->content)->str);
-	str = ft_strnew(read_size + cur_size); // +1
+	str = ft_strnew(read_size + cur_size);
 	str = ft_strcpy(str, ((t_buff *)head->content)->str);
 	str = ft_strcat(str, buff);
 	free(((t_buff *)head->content)->str);
@@ -60,12 +59,12 @@ static int	ft_readwrite(t_list *head, const int fd, int *i)
 	return (read_size);
 }
 
-static	int		ft_del_head(t_list **head, char **line)
+static	int	ft_del_head(t_list **head, char **line)
 {
 	t_list	*current;
 
 	if (line)
-		*line = ft_strnew(0);
+		*line = NULL;
 	free(((t_buff *)(*head)->content)->str);
 	current = (*head)->next;
 	free((*head)->content);
@@ -74,11 +73,10 @@ static	int		ft_del_head(t_list **head, char **line)
 	return (0);
 }
 
-static int		ft_rewrite(t_list **head, char **line, size_t size, int flag)
+static int	ft_rewrite(t_list **head, char **line, size_t size, int flag)
 {
 	char	*str;
 	size_t	size_len;
-
 
 	str = ft_strnew(size);
 	str = ft_strncpy(str, ((t_buff *)(*head)->content)->str, size);
@@ -100,7 +98,7 @@ int			get_next_line(const int fd, char **line)
 {
 	static t_list	*head;
 	size_t			str_size;
-	int				read_size; //ssize_t
+	int				read_size;
 	int				i;
 
 	ft_search_swap(&head, fd);
@@ -117,5 +115,5 @@ int			get_next_line(const int fd, char **line)
 		return (ft_rewrite(&head, line, str_size, 2));
 	if (!((t_buff *)head->content)->str[str_size + 1])
 		return (ft_rewrite(&head, line, str_size, 2));
-	return(ft_rewrite(&head, line, str_size, 1));
+	return (ft_rewrite(&head, line, str_size, 1));
 }

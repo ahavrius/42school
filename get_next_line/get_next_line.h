@@ -6,14 +6,14 @@
 /*   By: ahavrius <ahavrius@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 16:16:55 by ahavrius          #+#    #+#             */
-/*   Updated: 2018/11/01 16:20:26 by ahavrius         ###   ########.fr       */
+/*   Updated: 2018/11/04 18:33:38 by ahavrius         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-#include "libft.h"
+# include "libft.h"
 
 # define BUFF_SIZE 2
 
