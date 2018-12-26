@@ -6,15 +6,15 @@
 /*   By: ahavrius <ahavrius@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 20:00:02 by ahavrius          #+#    #+#             */
-/*   Updated: 2018/10/26 20:01:36 by ahavrius         ###   ########.fr       */
+/*   Updated: 2018/11/27 16:47:18 by ahavrius         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "../incs/libftprintf.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_strlen(const char *s)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	if (!s)

@@ -6,30 +6,29 @@
 /*   By: ahavrius <ahavrius@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 13:53:53 by ahavrius          #+#    #+#             */
-/*   Updated: 2018/11/24 19:55:37 by ahavrius         ###   ########.fr       */
+/*   Updated: 2018/11/27 16:20:46 by ahavrius         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFTPRINTF_H
 # define LIBFTPRINTF_H
 
+# include "libmodf.h"
 # include <unistd.h>
 # include <stdarg.h>
 # include <stdlib.h>
-
-//delete
-# include <stdio.h>
 
 int		ft_strchr_or(const char *s, int c);
 void	func_init(void);
 void	clean_flags(void);
 int		ft_atoi_simple(const char *str);
 char	*ft_strcpy(char *dst, const char *src);
-size_t	ft_strlen(const char *s);
-char	*ft_strnew(size_t size);
+int		ft_strlen(const char *s);
+char	*ft_strnew(int size);
 char	*ft_strchr(const char *s, int c);
+int		find_else(char *str, char c);
 
-int		check_mask(const char *format);
+int		check_mask(const char *format, va_list args);
 int		ft_printf(const char *format, ...);
 char	*ft_itoa_base_s(long long n, int base, int *len, int type);
 char	*ft_itoa_base_u(unsigned long long n, int base, int *len, int type);
@@ -40,22 +39,10 @@ int		ft_c(va_list args);
 int		ft_s(va_list args);
 int		ft_p(va_list args);
 int		ft_d_i(va_list args);
-int		ft_o_u_x_X(va_list args);
+int		ft_o_u_x(va_list args);
 int		ft_f(va_list args);
 int		ft_q(va_list args);
-int		error_alarm(char c);
-/*
-typedef union
-{
-	double			value;
-	struct
-	{
-		uint32_t	lsw;
-		uint32_t	msw;
-	}				parts;
-	uint64_t		word;
-}					ieee_double_shape_type;
-*/
+int		error_alarm(const char **c);
 
 int		g_opts;
 int		g_minlen;

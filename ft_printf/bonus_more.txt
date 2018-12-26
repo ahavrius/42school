@@ -1,0 +1,4 @@
+you can add 
+-C = lc = c working with unicode
+-S = lc = s working with unicode
+-DOU = l dou  - make it long (unsigned) int

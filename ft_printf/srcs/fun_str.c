@@ -6,11 +6,11 @@
 /*   By: ahavrius <ahavrius@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/18 13:08:57 by ahavrius          #+#    #+#             */
-/*   Updated: 2018/11/24 19:52:40 by ahavrius         ###   ########.fr       */
+/*   Updated: 2018/11/27 16:49:03 by ahavrius         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "../incs/libftprintf.h"
 
 int		ft_c(va_list args)
 {
@@ -65,13 +65,16 @@ int		ft_p(va_list args)
 	return (format(str, len, NULL));
 }
 
-int		error_alarm(char c)
+int		error_alarm(const char **c)
 {
 	char	*str;
 
+	if (**c == '\0')
+		return (0);
 	str = (char *)malloc(2);
-	str[0] = c;
+	str[0] = **c;
 	str[1] = '\0';
 	g_type = 'c';
+	(*c)++;
 	return (format(str, 1, NULL));
 }

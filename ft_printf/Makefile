@@ -6,32 +6,37 @@
 #    By: ahavrius <ahavrius@student.unit.ua>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/17 11:12:22 by ahavrius          #+#    #+#              #
-#    Updated: 2018/11/25 13:48:18 by ahavrius         ###   ########.fr        #
+#    Updated: 2018/11/27 15:18:33 by ahavrius         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 FLAGS = -Werror -Wextra -Wall
 NAME = libftprintf.a
 
-I_DIR = ./includes
-S_DIR = ./srcs
+INC_DIR = ./incs/
+SRC_DIR = ./srcs/
+OBJ_DIR = ./objs/
 
+SRC = added.c check_mask.c double_added.c format_str.c ft_comf.c ft_printf.c ft_strchr.c ft_strcpy.c ft_strlen.c ft_strnew.c fun_double.c fun_num.c fun_str.c num_added.c
+
+OBJ = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 
 all: $(NAME)
 
-$(NAME):
-	gcc -c $(FLAGS) $(S_DIR)/*.c -I $(I_DIR)
-#	gcc -c main.c -I $(I_DIR)
-	ar rc $(NAME) *.o
-	gcc -o $(NAME) *.o
+$(NAME): $(OBJ)
+	ar rc $(NAME) $(OBJ)
+
+$(OBJ_DIR)%.o: %.c
+	gcc -c $< -I $(INC_DIR)
 
 clean:
-	rm -f *.o
+	@rm -f $(OBJ)
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 clean_all: clean
-	rm -f *~
+	@rm -f *~
 re: fclean all
 
-db:
-	gcc -g  *.c
+vpath %.c $(SRC_DIR)
+
+

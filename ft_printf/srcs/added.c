@@ -6,11 +6,11 @@
 /*   By: ahavrius <ahavrius@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 13:11:49 by ahavrius          #+#    #+#             */
-/*   Updated: 2018/11/24 19:40:43 by ahavrius         ###   ########.fr       */
+/*   Updated: 2018/11/27 18:33:33 by ahavrius         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "../incs/libftprintf.h"
 
 int		ft_strchr_or(const char *s, int c)
 {
@@ -40,6 +40,7 @@ void	func_init(void)
 {
 	g_fd = 1;
 	g_dot = -1;
+	g_total_len = 0;
 	ft_strcpy(g_alpha[0], "0123456789abcdef");
 	ft_strcpy(g_alpha[1], "0123456789ABCDEF");
 	g_funcs['c' - 'a'] = &ft_c;
@@ -47,10 +48,10 @@ void	func_init(void)
 	g_funcs['p' - 'a'] = &ft_p;
 	g_funcs['d' - 'a'] = &ft_d_i;
 	g_funcs['i' - 'a'] = &ft_d_i;
-	g_funcs['o' - 'a'] = &ft_o_u_x_X;
-	g_funcs['u' - 'a'] = &ft_o_u_x_X;
-	g_funcs['x' - 'a'] = &ft_o_u_x_X;
-	g_funcs['b' - 'a'] = &ft_o_u_x_X;
+	g_funcs['o' - 'a'] = &ft_o_u_x;
+	g_funcs['u' - 'a'] = &ft_o_u_x;
+	g_funcs['x' - 'a'] = &ft_o_u_x;
+	g_funcs['b' - 'a'] = &ft_o_u_x;
 	g_funcs['f' - 'a'] = &ft_f;
 	g_funcs['q' - 'a'] = &ft_q;
 }

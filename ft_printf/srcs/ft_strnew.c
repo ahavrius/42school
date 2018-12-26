@@ -6,16 +6,16 @@
 /*   By: ahavrius <ahavrius@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 15:23:37 by ahavrius          #+#    #+#             */
-/*   Updated: 2018/10/26 11:20:48 by ahavrius         ###   ########.fr       */
+/*   Updated: 2018/11/27 16:47:58 by ahavrius         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "../incs/libftprintf.h"
 
-char	*ft_strnew(size_t size)
+char	*ft_strnew(int size)
 {
 	char	*new;
-	size_t	i;
+	int		i;
 
 	new = (char *)malloc(size + 1);
 	if (new == NULL)
