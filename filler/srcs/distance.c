@@ -21,9 +21,11 @@ int			opposite_cell(int x, int y)
 {
 	if (!board_edge(x, y))
 		return (0);
-	if (g_player == 1 && (g_real_board[x][y] == 'x' || g_real_board[x][y] == 'X'))
+	if (g_player == 1 && (g_real_board[x][y] == 'x' ||
+		g_real_board[x][y] == 'X'))
 		return (1);
-	if (g_player == 2 && (g_real_board[x][y] == 'o' || g_real_board[x][y] == 'O'))
+	if (g_player == 2 && (g_real_board[x][y] == 'o' ||
+		g_real_board[x][y] == 'O'))
 		return (1);
 	return (0);
 }
@@ -34,15 +36,19 @@ static void	distance_cell(int x, int y)
 	int	j;
 
 	i = 1;
+	if (opposite_cell(x, y))
+		g_dist_board[x][y] = -1;
 	while (!g_dist_board[x][y])
 	{
 		j = -1;
 		while (++j <= i && !g_dist_board[x][y])
-			if (opposite_cell(x - i + j, y + j) || 
+		{
+			if (opposite_cell(x - i + j, y + j) ||
 				opposite_cell(x - i + j, y - j) ||
 				opposite_cell(x + i - j, y - j) ||
 				opposite_cell(x + i - j, y + j))
 				g_dist_board[x][y] = i;
+		}
 		i++;
 	}
 }

@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahavrius <ahavrius@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/01 16:16:55 by ahavrius          #+#    #+#             */
-/*   Updated: 2018/11/04 18:33:38 by ahavrius         ###   ########.fr       */
+/*   Created: 2018/10/26 21:37:57 by ahavrius          #+#    #+#             */
+/*   Updated: 2018/10/29 19:29:07 by ahavrius         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include "libft.h"
-
-# define BUFF_SIZE 105
-
-int				get_next_line(const int fd, char **line);
-
-typedef struct	s_buff
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	int		isspace;
-	char	*str;
-	int		fd;
-}				t_buff;
+	size_t	i;
 
-#endif
+	i = 0;
+	if (!s1 || !s2)
+		return (-1);
+	while (s1[i] && s2[i] && i < n && s1[i] == s2[i])
+		i++;
+	if (i == n)
+		return (0);
+	return ((t_byte)s1[i] - (t_byte)s2[i]);
+}

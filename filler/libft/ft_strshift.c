@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strshift.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahavrius <ahavrius@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/01 16:16:55 by ahavrius          #+#    #+#             */
-/*   Updated: 2018/11/04 18:33:38 by ahavrius         ###   ########.fr       */
+/*   Created: 2018/10/24 17:57:48 by ahavrius          #+#    #+#             */
+/*   Updated: 2018/10/26 21:43:24 by ahavrius         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include "libft.h"
-
-# define BUFF_SIZE 105
-
-int				get_next_line(const int fd, char **line);
-
-typedef struct	s_buff
+size_t	ft_strshift(char const *s, char c, size_t start)
 {
-	int		isspace;
-	char	*str;
-	int		fd;
-}				t_buff;
+	size_t	i;
 
-#endif
+	if (!s)
+		return (0);
+	i = start;
+	while (s[i] && s[i] == c)
+		i++;
+	return (i);
+}

@@ -1,0 +1,33 @@
+
+FLAGS := -Werror -Wextra -Wall
+NAME := viso_filler
+
+INC_DIR := ./incs/
+SRC_DIR := ./srcs_viso
+OBJ_DIR := ./objs/
+VIS_I := -I /usr/local/include
+VIS_L := -L /usr/local/lib/ -lmlx -framework OpenGL -framework Appkit
+
+SRC := added.c display.c get_next_line.c main_visual.c read_input.c rect.c
+
+OBJ := $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
+
+all: $(NAME)
+
+$(NAME): $(OBJ)
+	gcc -o $(NAME) $(OBJ) $(VIS_I)  -L . -lft $(VIS_L)
+
+$(OBJ_DIR)%.o: %.c
+	gcc $(FLAGS) -c $< -o $@ -I $(INC_DIR)
+
+clean:
+	@rm -f $(OBJ)
+fclean: clean
+	@rm -f $(NAME)
+clean_all: clean
+	@rm -f *~
+re: fclean all
+
+vpath %.c $(SRC_DIR)
+
+

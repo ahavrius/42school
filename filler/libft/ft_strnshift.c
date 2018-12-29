@@ -1,29 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strnshift.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahavrius <ahavrius@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/01 16:16:55 by ahavrius          #+#    #+#             */
-/*   Updated: 2018/11/04 18:33:38 by ahavrius         ###   ########.fr       */
+/*   Created: 2018/10/24 17:57:10 by ahavrius          #+#    #+#             */
+/*   Updated: 2018/10/26 21:43:41 by ahavrius         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include "libft.h"
-
-# define BUFF_SIZE 105
-
-int				get_next_line(const int fd, char **line);
-
-typedef struct	s_buff
+size_t	ft_strnshift(char const *s1, char const *s2)
 {
-	int		isspace;
-	char	*str;
-	int		fd;
-}				t_buff;
+	size_t	i;
+	size_t	j;
+	char	flag;
 
-#endif
+	i = 0;
+	flag = 'n';
+	if (!s1 || !s2)
+		return (0);
+	while (*s1 && flag == 'n')
+	{
+		j = 0;
+		flag = 'y';
+		while (s2[j] && flag == 'y')
+		{
+			if (s1[i] == s2[j])
+				flag = 'n';
+			j++;
+		}
+		if (flag == 'n')
+			i++;
+	}
+	return (i);
+}

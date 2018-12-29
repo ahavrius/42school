@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahavrius <ahavrius@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/01 16:16:55 by ahavrius          #+#    #+#             */
-/*   Updated: 2018/11/04 18:33:38 by ahavrius         ###   ########.fr       */
+/*   Created: 2018/10/26 18:46:54 by ahavrius          #+#    #+#             */
+/*   Updated: 2018/10/29 19:27:06 by ahavrius         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include "libft.h"
-
-# define BUFF_SIZE 105
-
-int				get_next_line(const int fd, char **line);
-
-typedef struct	s_buff
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	int		isspace;
-	char	*str;
-	int		fd;
-}				t_buff;
+	t_byte	*str;
+	t_byte	chr;
+	size_t	i;
 
-#endif
+	chr = (t_byte)c;
+	if (!s)
+		return (NULL);
+	i = 0;
+	str = (t_byte *)s;
+	while (i++ < n)
+		if (str[i - 1] == chr)
+			return ((void *)(s + i - 1));
+	return (NULL);
+}

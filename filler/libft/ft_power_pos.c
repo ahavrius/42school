@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_power_pos.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahavrius <ahavrius@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/01 16:16:55 by ahavrius          #+#    #+#             */
-/*   Updated: 2018/11/04 18:33:38 by ahavrius         ###   ########.fr       */
+/*   Created: 2018/10/30 16:32:58 by ahavrius          #+#    #+#             */
+/*   Updated: 2018/10/30 16:33:00 by ahavrius         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include "libft.h"
-
-# define BUFF_SIZE 105
-
-int				get_next_line(const int fd, char **line);
-
-typedef struct	s_buff
+long	ft_power_pos(int nb, int power)
 {
-	int		isspace;
-	char	*str;
-	int		fd;
-}				t_buff;
+	long			res;
+	unsigned int	pos_power;
 
-#endif
+	res = 1;
+	if (power < 0)
+		return (0);
+	pos_power = power;
+	while (pos_power-- > 0)
+		res *= nb;
+	return (res);
+}

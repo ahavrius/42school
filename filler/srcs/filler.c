@@ -12,7 +12,6 @@
 
 #include "filler.h"
 
-
 static void	make_dist_board(void)
 {
 	int	i;
@@ -21,7 +20,6 @@ static void	make_dist_board(void)
 	i = -1;
 	while (++i < g_row)
 		g_dist_board[i] = (int *)ft_memalloc(sizeof(int) * g_col);
-
 }
 
 static void	del_final(void)
@@ -35,18 +33,25 @@ static void	get_data(void)
 {
 	if (!g_player)
 		get_player();
-	get_map();
-	get_token();
+	get_first_line(&g_row, &g_col);
+	if (g_terminate)
+	{
+		get_map();
+		get_token();
+	}
 }
 
-int			main()
+int			main(void)
 {
+	g_terminate = 1;
+	g_player = 0;
 	get_data();
-	printf("get_data finished\n");
-	make_dist_board();
-	printf("get_token started\n");
-	put_token();
-	printf("get_token finished\n");
-	del_final();
+	while (g_terminate)
+	{
+		make_dist_board();
+		put_token();
+		del_final();
+		get_data();
+	}
 	return (0);
 }

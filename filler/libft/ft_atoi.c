@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahavrius <ahavrius@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/01 16:16:55 by ahavrius          #+#    #+#             */
-/*   Updated: 2018/11/04 18:33:38 by ahavrius         ###   ########.fr       */
+/*   Created: 2018/10/29 15:24:45 by ahavrius          #+#    #+#             */
+/*   Updated: 2018/10/29 18:13:46 by ahavrius         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include "libft.h"
-
-# define BUFF_SIZE 105
-
-int				get_next_line(const int fd, char **line);
-
-typedef struct	s_buff
+int	ft_atoi(const char *str)
 {
-	int		isspace;
-	char	*str;
-	int		fd;
-}				t_buff;
+	long long	res;
+	int			sign;
 
-#endif
+	if (str == NULL)
+		return (0);
+	str += ft_strnshift(str, " \n\t\f\r\v");
+	sign = 1;
+	if (*str == '-')
+	{
+		sign = -1;
+		str++;
+	}
+	else if (*str == '+')
+		str++;
+	res = 0;
+	while (*str && ft_isdigit(*str))
+		res = 10 * res - '0' + *str++;
+	return (res * sign);
+}

@@ -10,16 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILLIT_H
-# define FILLIT_H
+#ifndef FILLER_H
+# define FILLER_H
 
 # include "get_next_line.h"
 # include "libft.h"
-
 # include <stdlib.h>
 # include <unistd.h>
-//system error messages  -  perror  strerror
-# include <stdio.h>
 
 char	g_player;
 int		g_col;
@@ -29,6 +26,7 @@ int		**g_dist_board;
 char	**g_token;
 int		g_row_token;
 int		g_col_token;
+int		g_terminate;
 
 int		opposite_cell(int x, int y);
 int		board_edge(int i, int j);
@@ -36,10 +34,9 @@ void	distance_board(void);
 void	put_token(void);
 
 void	get_player(void);
-void 	get_map(void);
+void	get_map(void);
 void	get_token(void);
 void	del_map(char **map, int row);
-
-
+void	get_first_line(int *row, int *col);
 
 #endif

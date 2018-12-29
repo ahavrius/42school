@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahavrius <ahavrius@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/01 16:16:55 by ahavrius          #+#    #+#             */
-/*   Updated: 2018/11/04 18:33:38 by ahavrius         ###   ########.fr       */
+/*   Created: 2018/10/26 20:44:55 by ahavrius          #+#    #+#             */
+/*   Updated: 2018/10/29 18:06:24 by ahavrius         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include "libft.h"
-
-# define BUFF_SIZE 105
-
-int				get_next_line(const int fd, char **line);
-
-typedef struct	s_buff
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	int		isspace;
-	char	*str;
-	int		fd;
-}				t_buff;
+	size_t	i;
+	size_t	len;
 
-#endif
+	i = 0;
+	if (!dst || !src)
+		return (0);
+	while (i < size && dst[i])
+		i++;
+	len = i;
+	i = 0;
+	while (src[i] && i + len + 1 < size)
+	{
+		dst[i + len] = src[i];
+		i++;
+	}
+	if (len < size)
+		dst[i + len] = '\0';
+	return (ft_strlen(src) + len);
+}
