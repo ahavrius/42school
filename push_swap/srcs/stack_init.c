@@ -12,22 +12,75 @@
 
 #include "../incs/push_swap.h"
 
-static t_stack	*init_node(int value)
+static t_stack	*init_node(int value, int range)
 {
 	t_stack		*new;
 
 	new = (t_stack *)malloc(sizeof(t_stack));
+	new->range = range;
 	new->value = value;
 	new->next = new;;
 	new->prev = new;
 	return (new);
 }
 
-void			push_to_tail(t_stack **head, int value)
+//change len_stacks
+int				len_stack_till(t_stack *head, int range)
+{
+	int		count;
+	t_stack	*current;
+
+	if (!head || head->range == range)
+		return (0);
+	count = 1;
+	current = head->next;
+	while (current != head && current->range != range)
+	{
+		count++;
+		current = current->next;
+	}
+	return (count);
+}
+
+int				len_stack_while(t_stack *head, int range)
+{
+	int		count;
+	t_stack	*current;
+
+	if (!head || head->range != range)
+		return (0);
+	count = 1;
+	current = head->next;
+	while (current != head && current->range == range)
+	{
+		count++;
+		current = current->next;
+	}
+	return (count);
+}
+
+int				len_stack(t_stack *head)
+{
+	int		count;
+	t_stack	*current;
+
+	if (!head)
+		return (0);
+	count = 1;
+	current = head->next;
+	while (current != head)
+	{
+		count++;
+		current = current->next;
+	}
+	return (count);
+}
+
+void			push_to_tail(t_stack **head, int value, int range)
 {
 	t_stack		*new;
 
-	new = init_node(value);
+	new = init_node(value, range);
 	if (!(*head))
 	{
 		*head = new;
@@ -58,12 +111,12 @@ int 			try_push(t_stack *head, int value) //for double numbers
 }
 
 
-void			del_all(t_stack **head)
+void			del_stack(t_stack **head)
 {
 	t_stack		*current;
 	t_stack		*old;
 
-	if (!(*head))
+	if (!(*head) || !head)
 		return ;
 	current = (*head)->next;
 	while (current != *head)

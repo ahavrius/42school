@@ -1,0 +1,26 @@
+./viso_push_swap 3 1 9 8 2 5 7 6 4
+pb
+pb
+ra
+ra
+pb
+ra
+ra
+ra
+ra
+rra
+pb
+ra
+ra
+pb
+ra
+pb
+ra
+sa
+pa
+pa
+pa
+rrb
+pa
+pa
+pa

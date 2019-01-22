@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../incs/push_swap.h"
-#include <limits.h>
+
 
 static long long	atoi_correct(const char *str)
 {
@@ -44,10 +44,10 @@ void			write_stack(t_stack *a)
 	if (a)
 	{
 		current = a->next;
-		printf("%d ", a->value);
+		printf("%d   |%d|  ", a->value, current->range);
 		while (current != a)
 		{
-			printf("%d ", current->value);
+			printf("%d  |%d|   ", current->value, current->range);
 			current = current->next;
 		}
 	}
@@ -65,7 +65,7 @@ int				read_stack(t_stack **a, char **arg, int count)
 		value = atoi_correct(arg[i]);
 		if (value < INT_MIN || value > INT_MAX || !try_push(*a, value))
 			return (-1);
-		push_to_tail(a, value);
+		push_to_tail(a, value, 0);
 	}
 	return (1);
 }

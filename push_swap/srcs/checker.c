@@ -12,8 +12,7 @@
 
 #include "../incs/push_swap.h"
 
-
-static int 	check_instractions(t_stack **a, t_stack **b, char *line)
+int 	check_instractions(t_stack **a, t_stack **b, char *line)
 {
 	if (!ft_strcmp(line, "sa"))
 		swap(*a);
@@ -51,7 +50,7 @@ static int 	check_instractions(t_stack **a, t_stack **b, char *line)
 	return (1);
 }
 
-static int 	check_stacks(t_stack *a, t_stack *b)
+int 	check_stacks(t_stack *a, t_stack *b)
 {
 	int 		flag;
 	t_stack		*head;
@@ -60,15 +59,13 @@ static int 	check_stacks(t_stack *a, t_stack *b)
 	head = (a) ? a->next : NULL;
 	while (a && head != a && flag)
 	{
-		flag = (head->prev->value <= head->value); //sort by acsel ??
+		flag = (head->prev->value <= head->value);
 		head = head->next;
 	}
 	return (flag);
 }
 
-
-
-int		main(int argc, char **argv)
+int		main_checker(int argc, char **argv)
 {
 	t_stack	*a;
 	t_stack	*b;
@@ -77,19 +74,11 @@ int		main(int argc, char **argv)
 
 	a = NULL;
 	b = NULL;
-	if (argc == 1)
-		return (0);
 	if (read_stack(&a, argv, argc) == -1)		
 		return (0 * write(1, "Error\n", 6));
 	flag = 1;
 	while (get_next_line(0, &line) == 1 && flag)
-	{
 		flag *= check_instractions(&a, &b, line);
-		printf("a | ");
-		write_stack(a);
-		printf("b | ");
-		write_stack(b);
-	}
 	if (!flag)
 		write(1, "Error\n", 6);
 	else
@@ -100,7 +89,7 @@ int		main(int argc, char **argv)
 		else
 			write(1, "KO\n", 3);
 	}
-	del_all(&a);
-
+	del_stack(&a);
+	del_stack(&b);
 	return (0);
 }

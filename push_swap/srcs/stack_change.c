@@ -21,6 +21,9 @@ void				swap(t_stack *head)
 		current = head->value;
 		head->value = head->next->value;
 		head->next->value = current;
+		current = head->range;
+		head->range = head->next->range;
+		head->next->range = current;
 	}
 }
 
@@ -31,7 +34,7 @@ void				push(t_stack **a, t_stack **b) //from a push to the top of b
 	if (!*a)
 		return ;
 	cur_a = *a;
-	push_to_tail(b, (*a)->value);
+	push_to_tail(b, (*a)->value, (*a)->range);
 	*b = (*b)->prev;
 	if (*a == (*a)->next)
 		*a = NULL;
@@ -43,7 +46,6 @@ void				push(t_stack **a, t_stack **b) //from a push to the top of b
 	}
 	free(cur_a);
 }
-
 
 void				rotate(t_stack **a)
 {

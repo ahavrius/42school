@@ -12,20 +12,36 @@
 
 FLAGS := -Wall
 #-Werror -Wextra -Wall
-NAME := checker
+NAME := push_swap
+
+VISO_M := viso_push_swap
 
 INC_DIR := ./incs/
 SRC_DIR := ./srcs/
 OBJ_DIR := ./objs/
 
-SRC := checker.c get_next_line.c read_correct.c stack_change.c stack_init.c
+VIS_I := -I /usr/local/include
+VIS_L := -L /usr/local/lib/ -lmlx -framework OpenGL -framework Appkit
+
+SRC := checker.c display.c get_next_line.c main_checker.c  main_visual.c read_correct.c rect.c stack_change.c stack_init.c visual.c main_sort.c sort_part.c sort_rec.c
+
+SRC_MAIN := sort_part.c sort_rec.c stack_change.c stack_init.c read_correct.c main_sort.c
+SRC_CHECKER := checker.c get_next_line.c read_correct.c stack_change.c stack_init.c main_checker.c
+SRC_VISO := display.c main_visual.c rect.c visual.c checker.c get_next_line.c read_correct.c stack_change.c stack_init.c
 
 OBJ := $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	gcc -o  $(NAME) $(OBJ)  -L . -lft
+	gcc -o  $(NAME) $(addprefix $(OBJ_DIR), $(SRC_MAIN:.c=.o))  -L . -lft
+
+
+check: $(OBJ)
+	gcc -o  $(NAME) $(addprefix $(OBJ_DIR), $(SRC_CHECKER:.c=.o))  -L . -lft
+
+viso: $(OBJ)
+	gcc -o  $(VISO_M) $(addprefix $(OBJ_DIR), $(SRC_VISO:.c=.o)) $(VIS_I) -L . -lft $(VIS_L)
 
 $(OBJ_DIR)%.o: %.c
 	gcc -c $< -o $@ -I $(INC_DIR)
