@@ -10,71 +10,49 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incs/push_swap.h"
+#include "push_swap.h"
 
-int 	check_instractions(t_stack **a, t_stack **b, char *line)
+static int	not_forbiddne_ins(char *line)
 {
-	if (!ft_strcmp(line, "sa"))
+	return (!ft_strcmp(line, "sa") || !ft_strcmp(line, "ss") ||
+		!ft_strcmp(line, "sb") || !ft_strcmp(line, "pa") ||
+		!ft_strcmp(line, "pb") || !ft_strcmp(line, "ra") ||
+		!ft_strcmp(line, "rr") || !ft_strcmp(line, "rra") ||
+		!ft_strcmp(line, "rrr") || !ft_strcmp(line, "rrb") ||
+		!ft_strcmp(line, "rb"));
+}
+
+int			check_instractions(t_stack **a, t_stack **b, char *line)
+{
+	if (!ft_strcmp(line, "sa") || !ft_strcmp(line, "ss"))
 		swap(*a);
-	else if (!ft_strcmp(line, "sb"))
+	if (!ft_strcmp(line, "sb") || !ft_strcmp(line, "ss"))
 		swap(*b);
-	else if (!ft_strcmp(line, "ss"))
-	{
-		swap(*a);
-		swap(*b);
-	}
-	else if (!ft_strcmp(line, "pa"))
+	if (!ft_strcmp(line, "pa"))
 		push(b, a);
-	else if (!ft_strcmp(line, "pb"))
+	if (!ft_strcmp(line, "pb"))
 		push(a, b);
-	else if (!ft_strcmp(line, "ra"))
+	if (!ft_strcmp(line, "ra") || !ft_strcmp(line, "rr"))
 		rotate(a);
-	else if (!ft_strcmp(line, "rb"))
+	if (!ft_strcmp(line, "rb") || !ft_strcmp(line, "rr"))
 		rotate(b);
-	else if (!ft_strcmp(line, "rr"))
-	{
-		rotate(a);
-		rotate(b);
-	}
-	else if (!ft_strcmp(line, "rra"))
+	if (!ft_strcmp(line, "rra") || !ft_strcmp(line, "rrr"))
 		re_rotate(a);
-	else if (!ft_strcmp(line, "rrb"))
+	if (!ft_strcmp(line, "rrb") || !ft_strcmp(line, "rrr"))
 		re_rotate(b);
-	else if (!ft_strcmp(line, "rrr"))
-	{
-		re_rotate(a);
-		re_rotate(b);
-	}
-	else
-		return (0);
-	return (1);
+	return (not_forbiddne_ins(line));
 }
 
-int 	check_stacks(t_stack *a, t_stack *b)
-{
-	int 		flag;
-	t_stack		*head;
-
-	flag  = (b == NULL);
-	head = (a) ? a->next : NULL;
-	while (a && head != a && flag)
-	{
-		flag = (head->prev->value <= head->value);
-		head = head->next;
-	}
-	return (flag);
-}
-
-int		main_checker(int argc, char **argv)
+int			main_checker(int argc, char **argv)
 {
 	t_stack	*a;
 	t_stack	*b;
 	char	*line;
-	int 	flag;
+	int		flag;
 
 	a = NULL;
 	b = NULL;
-	if (read_stack(&a, argv, argc) == -1)		
+	if (read_stack(&a, argv, argc) == -1)
 		return (0 * write(1, "Error\n", 6));
 	flag = 1;
 	while (get_next_line(0, &line) == 1 && flag)
@@ -83,7 +61,7 @@ int		main_checker(int argc, char **argv)
 		write(1, "Error\n", 6);
 	else
 	{
-		flag = check_stacks(a, b);
+		flag = is_sort_stack_check(a) && (b == NULL);
 		if (flag)
 			write(1, "OK\n", 3);
 		else

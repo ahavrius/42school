@@ -38,7 +38,7 @@ int			median_stack(t_stack *a, t_func func)
 		return (FIN);
 	len = len_stack_while(a, a->range);
 	current = a->next;
-	if (count_leq_element(a, a->value, func) == MEAN(len)) //remove cos it doesn't matter
+	if (count_leq_element(a, a->value, func) == MEAN(len))
 		return (a->value);
 	while (current != a && current->range == a->range)
 	{
@@ -72,10 +72,10 @@ void		find_sort_el(t_stack *a, t_func func)
 		current = current->prev;
 	}
 	if (flag && count_leq_element(a, current->value, func) == len)
-			current->range = FIN;
+		current->range = FIN;
 }
 
-void	fill_range_value(t_stack *a, int value)
+void		fill_range_value(t_stack *a, int value)
 {
 	t_stack	*current;
 
@@ -92,14 +92,11 @@ void	fill_range_value(t_stack *a, int value)
 	a->range = value;
 }
 
-//write_normal
-void	tail_to_up(t_stack **a, int	value, char *str)
+void		tail_to_up(t_stack **a, int value, char c, t_list **output)
 {
-	if (!a || !*a || value == FIN || len_stack_while(*a, value) == len_stack(*a)) //doesn't need to do it
+	if (!a || !*a || value == FIN || len_stack(*a) <= 3 ||
+		len_stack_while(*a, value) == len_stack(*a))
 		return ;
 	while ((*a)->prev->range == value)
-	{
-		printf("%s\n", str);
-		re_rotate(a);
-	}
+		re_rotate_print(a, output, c);
 }

@@ -27,7 +27,7 @@ $(NAME): $(OBJ)
 	ar rc $(NAME) $(OBJ)
 
 $(OBJ_DIR)%.o: %.c
-	gcc -c $< -I $(INC_DIR)
+	gcc -c $< -o $@ -I $(INC_DIR)
 
 clean:
 	@rm -f $(OBJ)

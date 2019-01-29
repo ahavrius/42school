@@ -16,9 +16,9 @@ int	main(int argc, char **argv)
 {
 	if (argc == 1)
 		return (0);
-	if (!ft_strcmp(argv[1], "-v"))
-		main_visual(argc - 1, &argv[1]);
+	if (argc == 2)
+		read_with_args(argv[1], main_checker);
 	else
-		main_checker(argc, argv);
+		main_checker(argc - 1, &argv[1]);
 	return (0);
 }

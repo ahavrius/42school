@@ -12,35 +12,13 @@
 
 #include "push_swap.h"
 
-int		leq_stack(t_stack *a, int value)// <=
+int	main(int argc, char **argv)
 {
-	if (!a)
+	if (argc == 1)
 		return (0);
-	return (a->value <= value);
-}
-
-int		geq_stack(t_stack *a, int value)// >=
-{
-	if (!a)
-		return (0);
-	return (a->value >= value);
-}
-
-int		main(int argc, char **argv)
-{
-	t_stack	*a;
-	t_stack	*b;
-
-	a = NULL;
-	b = NULL;
-	if (read_stack(&a, argv, argc) == -1)		
-		return (0 * write(1, "Error\n", 6));
-	sort(&a, &b);
-
-	//parce_stack(&a, &b, &leq_stack);
-	//write_stack(a);
-	//write_stack(b);
-	del_stack(&a);
-	del_stack(&b);
+	if (argc == 2)
+		read_with_args(argv[1], main_sort);
+	else
+		main_sort(argc - 1, &argv[1]);
 	return (0);
 }

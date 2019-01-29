@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incs/push_swap.h"
+#include "push_swap.h"
 
 void				swap(t_stack *head)
 {
@@ -27,7 +27,7 @@ void				swap(t_stack *head)
 	}
 }
 
-void				push(t_stack **a, t_stack **b) //from a push to the top of b
+void				push(t_stack **a, t_stack **b)
 {
 	t_stack		*cur_a;
 

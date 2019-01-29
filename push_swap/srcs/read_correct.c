@@ -6,12 +6,26 @@
 /*   By: ahavrius <ahavrius@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/02 12:24:04 by ahavrius          #+#    #+#             */
-/*   Updated: 2018/12/02 12:24:05 by ahavrius         ###   ########.fr       */
+/*   Updated: 2019/01/23 20:51:31 by ahavrius         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incs/push_swap.h"
+#include "push_swap.h"
 
+int					is_sort_stack_check(t_stack *a)
+{
+	int		flag;
+	t_stack	*head;
+
+	flag = 1;
+	head = (a) ? a->next : NULL;
+	while (a && head != a && flag)
+	{
+		flag = (head->prev->value <= head->value);
+		head = head->next;
+	}
+	return (flag);
+}
 
 static long long	atoi_correct(const char *str)
 {
@@ -36,30 +50,12 @@ static long long	atoi_correct(const char *str)
 	return ((long long)INT_MAX + 1);
 }
 
-//delete
-void			write_stack(t_stack *a)
-{
-	t_stack 	*current;
-
-	if (a)
-	{
-		current = a->next;
-		printf("%d   |%d|  ", a->value, current->range);
-		while (current != a)
-		{
-			printf("%d  |%d|   ", current->value, current->range);
-			current = current->next;
-		}
-	}
-	printf("\n");
-}		
-
-int				read_stack(t_stack **a, char **arg, int count)
+int					read_stack(t_stack **a, char **arg, int count)
 {
 	long long	value;
 	int			i;
 
-	i = 0;
+	i = -1;
 	while (++i < count)
 	{
 		value = atoi_correct(arg[i]);

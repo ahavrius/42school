@@ -76,4 +76,4 @@ int				main_visual(int argc, char **argv);
 
 void			write_stack(t_stack *a);
 
-# endif
+#endif
