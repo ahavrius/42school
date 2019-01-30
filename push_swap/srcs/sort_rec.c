@@ -14,7 +14,7 @@
 
 int			is_sort_stack(t_stack *a)
 {
-	return (len_stack_till(a, FIN) == 0);
+	return (len_stack_while(a, FIN) == len_stack(a));
 }
 
 int			parce_stack(t_stack **a, t_stack **b, t_func func1, t_list **output)

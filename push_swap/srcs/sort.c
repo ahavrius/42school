@@ -42,7 +42,10 @@ int		main_sort(int argc, char **argv)
 	b = NULL;
 	output = NULL;
 	if (read_stack(&a, argv, argc) == -1)
+	{
+		del_stack(&a);
 		return (0 * write(1, "Error\n", 6));
+	}
 	sort(&a, &b, &output);
 	output = ft_lst_reverse(output);
 	print_output(output);

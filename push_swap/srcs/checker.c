@@ -40,6 +40,7 @@ int			check_instractions(t_stack **a, t_stack **b, char *line)
 		re_rotate(a);
 	if (!ft_strcmp(line, "rrb") || !ft_strcmp(line, "rrr"))
 		re_rotate(b);
+	free(line);
 	return (not_forbiddne_ins(line));
 }
 
@@ -52,12 +53,10 @@ int			main_checker(int argc, char **argv)
 
 	a = NULL;
 	b = NULL;
-	if (read_stack(&a, argv, argc) == -1)
-		return (0 * write(1, "Error\n", 6));
-	flag = 1;
-	while (get_next_line(0, &line) == 1 && flag)
+	flag = read_stack(&a, argv, argc);
+	while (flag == 1 && get_next_line(0, &line) == 1)
 		flag *= check_instractions(&a, &b, line);
-	if (!flag)
+	if (flag != 1)
 		write(1, "Error\n", 6);
 	else
 	{

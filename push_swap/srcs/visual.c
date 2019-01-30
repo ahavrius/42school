@@ -28,7 +28,6 @@ static int			esc_key(int key, void *param)
 			esc_key(ESC, param);
 		check_instractions(&((t_wind_stack *)param)->a,
 			&((t_wind_stack *)param)->b, line);
-		free(line);
 		mlx_clear_window(((t_wind_stack *)param)->data->mlx_ptr,
 			((t_wind_stack *)param)->data->mlx_win);
 		display(((t_wind_stack *)param)->data, ((t_wind_stack *)param)->window,

@@ -92,7 +92,7 @@ void	sort_210(t_stack **a, t_stack **b, char which, t_list **output)
 	{
 		if (len_stack(*a) <= 3)
 		{
-			re_rotate_print(a, output, which);
+			swap_print(*a, output, which);
 			re_rotate_print(a, output, which);
 		}
 		else
