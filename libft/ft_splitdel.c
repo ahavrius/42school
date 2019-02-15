@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd.c                                        :+:      :+:    :+:   */
+/*   ft_splitdel.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahavrius <ahavrius@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/29 15:02:41 by ahavrius          #+#    #+#             */
-/*   Updated: 2018/10/29 15:03:00 by ahavrius         ###   ########.fr       */
+/*   Created: 2019/02/14 17:37:13 by ahavrius          #+#    #+#             */
+/*   Updated: 2019/02/14 17:37:14 by ahavrius         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd(t_list **alst, t_list *new)
+void	ft_splitdel(char **square)
 {
-	if (!alst || !new)
-		return ;
-	new->next = *alst;
-	*alst = new;
+	int	i;
+
+	i = 0;
+	while (square[i])
+	{
+		free(square[i]);
+		++i;
+	}
+	free(square);
 }

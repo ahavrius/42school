@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd.c                                        :+:      :+:    :+:   */
+/*   linlist_del_head.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahavrius <ahavrius@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/29 15:02:41 by ahavrius          #+#    #+#             */
-/*   Updated: 2018/10/29 15:03:00 by ahavrius         ###   ########.fr       */
+/*   Created: 2019/02/13 18:59:05 by ahavrius          #+#    #+#             */
+/*   Updated: 2019/02/13 18:59:05 by ahavrius         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "linked_list.h"
 
-void	ft_lstadd(t_list **alst, t_list *new)
+void	linlist_del_head(t_linlist **alst, void (*del)(void *, size_t))
 {
-	if (!alst || !new)
+	t_linlist	*old;
+
+	if (!alst || !del || !*alst)
 		return ;
-	new->next = *alst;
-	*alst = new;
+	old = ((*alst)->next);
+	linlist_del_el(alst, del);
+	*alst = old;
+	if (*alst)
+		(*alst)->prev = NULL;
 }

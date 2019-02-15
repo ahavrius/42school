@@ -16,6 +16,8 @@
 # include <string.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include "linked_list.h"
+# include "get_next_line.h"
 
 typedef	unsigned char	t_byte;
 
@@ -80,6 +82,9 @@ void				ft_putnbr_fd(int n, int fd);
 
 size_t				ft_strnshift(char const *s1, char const *s2);
 size_t				ft_strshift(char const *s, char c, size_t start);
+int					ft_strcountchr(char *str, char c);
+void				ft_splitdel(char **square);
+
 typedef struct		s_list
 {
 	void			*content;
@@ -95,8 +100,11 @@ void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 void				ft_lstiter2(t_list **lst, void (*f)(t_list **elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 
+t_list				*ft_lstnew_link(void *content, size_t content_size);
 t_list				*ft_lst_reverse(t_list *head);
 int					ft_lstlen(t_list *head);
 void				ft_lstdelnext(t_list *alst, void (*del)(void *, size_t));
+t_list				*ft_lstfind(t_list *head, void *content,
+						int (*f)(void *, void *));
 
 #endif

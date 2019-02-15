@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd.c                                        :+:      :+:    :+:   */
+/*   linlist_find.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahavrius <ahavrius@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/29 15:02:41 by ahavrius          #+#    #+#             */
-/*   Updated: 2018/10/29 15:03:00 by ahavrius         ###   ########.fr       */
+/*   Created: 2019/02/14 18:33:51 by ahavrius          #+#    #+#             */
+/*   Updated: 2019/02/14 18:33:51 by ahavrius         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd(t_list **alst, t_list *new)
+t_linlist	*linlist_find(t_linlist *head, void *content,
+	int (*f)(void *, void *))
 {
-	if (!alst || !new)
-		return ;
-	new->next = *alst;
-	*alst = new;
+	if (!f)
+		return (NULL);
+	while (head && !f(head->content, content))
+		head = head->next;
+	return (head);
 }

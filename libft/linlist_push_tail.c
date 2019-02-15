@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd.c                                        :+:      :+:    :+:   */
+/*   linlist_push_tail.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahavrius <ahavrius@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/29 15:02:41 by ahavrius          #+#    #+#             */
-/*   Updated: 2018/10/29 15:03:00 by ahavrius         ###   ########.fr       */
+/*   Created: 2019/02/13 18:58:00 by ahavrius          #+#    #+#             */
+/*   Updated: 2019/02/13 18:58:01 by ahavrius         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "linked_list.h"
 
-void	ft_lstadd(t_list **alst, t_list *new)
+void	linlist_push_tail(t_linlist **alst, t_linlist *new)
 {
 	if (!alst || !new)
 		return ;
-	new->next = *alst;
+	new->prev = *alst;
+	new->next = NULL;
+	(*alst)->next = new;
 	*alst = new;
 }

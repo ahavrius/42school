@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd.c                                        :+:      :+:    :+:   */
+/*   linlist_iter.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahavrius <ahavrius@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/29 15:02:41 by ahavrius          #+#    #+#             */
-/*   Updated: 2018/10/29 15:03:00 by ahavrius         ###   ########.fr       */
+/*   Created: 2019/02/13 19:42:12 by ahavrius          #+#    #+#             */
+/*   Updated: 2019/02/13 19:42:13 by ahavrius         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "linked_list.h"
 
-void	ft_lstadd(t_list **alst, t_list *new)
+void	linlist_iter(t_linlist *lst, void (*f)(t_linlist *elem))
 {
-	if (!alst || !new)
+	if (!f)
 		return ;
-	new->next = *alst;
-	*alst = new;
+	while (lst)
+	{
+		f(lst);
+		lst = lst->next;
+	}
 }
