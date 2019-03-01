@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdel.c                                        :+:      :+:    :+:   */
+/*   linlist_reverse.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahavrius <ahavrius@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/29 15:03:12 by ahavrius          #+#    #+#             */
-/*   Updated: 2018/10/29 15:31:37 by ahavrius         ###   ########.fr       */
+/*   Created: 2019/02/16 19:29:06 by ahavrius          #+#    #+#             */
+/*   Updated: 2019/02/16 19:29:20 by ahavrius         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "linked_list.h"
 
-void	ft_lstdel(t_list **alst, void (*del)(void *, size_t))
+void	linlist_reverse(t_linlist **head, t_linlist **tail)
 {
-	t_list	*old;
+	t_linlist	*current;
+	t_linlist	*change;
 
-	if (!alst)
+	if (!tail || !head || !*tail || !*head || !(*head)->next)
 		return ;
-	while (*alst)
+	current = *tail;
+	while (!current)
 	{
-		old = ((*alst)->next);
-		ft_lstdelone(alst, del);
-		*alst = old;
+		change = current->prev;
+		current->prev = current->next;
+		current->next = change;
+		current = change;
 	}
-	*alst = NULL;
+	change = *tail;
+	*tail = *head;
+	*head = change;
 }

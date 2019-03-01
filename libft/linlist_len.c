@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdel.c                                        :+:      :+:    :+:   */
+/*   linlist_len.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahavrius <ahavrius@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/29 15:03:12 by ahavrius          #+#    #+#             */
-/*   Updated: 2018/10/29 15:31:37 by ahavrius         ###   ########.fr       */
+/*   Created: 2019/02/16 17:53:00 by ahavrius          #+#    #+#             */
+/*   Updated: 2019/02/16 17:53:36 by ahavrius         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "linked_list.h"
 
-void	ft_lstdel(t_list **alst, void (*del)(void *, size_t))
+int		linlist_len(t_linlist *head)
 {
-	t_list	*old;
+	int		i;
 
-	if (!alst)
-		return ;
-	while (*alst)
+	i = 0;
+	while (head)
 	{
-		old = ((*alst)->next);
-		ft_lstdelone(alst, del);
-		*alst = old;
+		head = head->next;
+		i++;
 	}
-	*alst = NULL;
+	return (i);
 }

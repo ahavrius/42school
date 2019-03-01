@@ -12,7 +12,8 @@
 
 #include "linked_list.h"
 
-void	linlist_delall(t_linlist **alst, void (*del)(void *, size_t))
+void	linlist_delall(t_linlist **alst, t_linlist **tail,
+						void (*del)(void *, size_t))
 {
 	t_linlist	*old;
 
@@ -25,4 +26,5 @@ void	linlist_delall(t_linlist **alst, void (*del)(void *, size_t))
 		*alst = old;
 	}
 	*alst = NULL;
+	*tail = NULL;
 }

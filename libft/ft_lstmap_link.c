@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdel.c                                        :+:      :+:    :+:   */
+/*   ft_lstmap_link.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahavrius <ahavrius@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/29 15:03:12 by ahavrius          #+#    #+#             */
-/*   Updated: 2018/10/29 15:31:37 by ahavrius         ###   ########.fr       */
+/*   Created: 2019/02/21 15:07:05 by ahavrius          #+#    #+#             */
+/*   Updated: 2019/02/21 15:07:06 by ahavrius         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstdel(t_list **alst, void (*del)(void *, size_t))
-{
-	t_list	*old;
+/*
+**the functoin reverse list before return. may use ft_lstreverse to get norm
+*/
 
-	if (!alst)
-		return ;
-	while (*alst)
+t_list	*ft_lstmap_link(t_list *lst, t_list *(*f)(t_list *elem))
+{
+	t_list	*head;
+
+	head = NULL;
+	while (lst && f)
 	{
-		old = ((*alst)->next);
-		ft_lstdelone(alst, del);
-		*alst = old;
+		ft_lstadd(&head, f(lst));
+		lst = lst->next;
 	}
-	*alst = NULL;
+	return (head);
 }

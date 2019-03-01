@@ -12,12 +12,15 @@
 
 #include "linked_list.h"
 
-void	linlist_del_head(t_linlist **alst, void (*del)(void *, size_t))
+void	linlist_del_head(t_linlist **alst, t_linlist **tail,
+							void (*del)(void *, size_t))
 {
 	t_linlist	*old;
 
 	if (!alst || !del || !*alst)
 		return ;
+	if (*alst == *tail)
+		*tail = NULL;
 	old = ((*alst)->next);
 	linlist_del_el(alst, del);
 	*alst = old;
