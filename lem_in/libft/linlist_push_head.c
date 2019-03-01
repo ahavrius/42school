@@ -12,12 +12,15 @@
 
 #include "linked_list.h"
 
-void	linlist_push_head(t_linlist **alst, t_linlist *new)
+void	linlist_push_head(t_linlist **alst, t_linlist **tail, t_linlist *new)
 {
-	if (!alst || !new)
+	if (!new || !alst || !tail)
 		return ;
 	new->next = *alst;
 	new->prev = NULL;
-	(*alst)->prev = new;
+	if (*alst)
+		(*alst)->prev = new;
 	*alst = new;
+	if (!*tail)
+		*tail = new;
 }

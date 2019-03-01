@@ -1,27 +1,29 @@
 
 FLAGS := -Werror -Wextra -Wall
-NAME := lem_in
+NAME := lem-in
 
-INC_DIR := ./incs/
-SRC_DIR := ./srcs/
+INC_DIR := -I ./incs/
+INC_DIR_LIB := -I ./libft/
+
+SRC_DIR := ./resources/
 OBJ_DIR := ./objs/
 
 LIB_M := ./libft/Makefile
 
-SRC := adding.c graph_operations.c parsing.c main.c
+SRC := graph_operations.c parsing.c main.c bfs.c path_manager.c efficiency.c recurse.c print_res.c special_case.c
 
 OBJ := $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 
 all: lib $(NAME)
 
 $(NAME): $(OBJ)
-	gcc -o  $(NAME) $(OBJ) -L. -lft
+	gcc  -o $(NAME) $(OBJ) -L. -lft
 
 lib:
 	make -f $(LIB_M)
 
 $(OBJ_DIR)%.o: %.c
-	gcc -c $(FLAGS)  $< -o $@ -I $(INC_DIR)
+	gcc -c $(FLAGS)  $< -o $@  $(INC_DIR) $(INC_DIR_LIB)
 
 clean:
 	@rm -f $(OBJ)

@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdel.c                                        :+:      :+:    :+:   */
+/*   linlist_pop_head.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahavrius <ahavrius@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/29 15:03:12 by ahavrius          #+#    #+#             */
-/*   Updated: 2018/10/29 15:31:37 by ahavrius         ###   ########.fr       */
+/*   Created: 2019/02/16 16:17:37 by ahavrius          #+#    #+#             */
+/*   Updated: 2019/02/16 16:17:38 by ahavrius         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "linked_list.h"
 
-void	ft_lstdel(t_list **alst, void (*del)(void *, size_t))
+void	*linlist_pop_head(t_linlist **alst, t_linlist **tail)
 {
-	t_list	*old;
+	t_linlist	*old;
+	void		*content;
 
-	if (!alst)
-		return ;
-	while (*alst)
-	{
-		old = ((*alst)->next);
-		ft_lstdelone(alst, del);
-		*alst = old;
-	}
-	*alst = NULL;
+	if (!alst || !tail || !*alst)
+		return (NULL);
+	if (*alst == *tail)
+		*tail = NULL;
+	content = (*alst)->content;
+	old = (*alst)->next;
+	free(*alst);
+	*alst = old;
+	if (*alst)
+		(*alst)->prev = NULL;
+	return (content);
 }

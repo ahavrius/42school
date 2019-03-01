@@ -1,37 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   adding.c                                           :+:      :+:    :+:   */
+/*   linlist_reverse.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahavrius <ahavrius@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/14 19:28:11 by ahavrius          #+#    #+#             */
-/*   Updated: 2019/02/14 19:28:12 by ahavrius         ###   ########.fr       */
+/*   Created: 2019/02/16 19:29:06 by ahavrius          #+#    #+#             */
+/*   Updated: 2019/02/16 19:29:20 by ahavrius         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "linked_list.h"
 
-int		atoi_correct(const char *str)
+void	linlist_reverse(t_linlist **head, t_linlist **tail)
 {
-	long	res;
-	int		sign;
+	t_linlist	*current;
+	t_linlist	*change;
 
-	if (!str || !*str || g_error)
-		return (g_error = 2);
-	sign = 1;
-	res = 0;
-	if (*str == '-')
+	if (!tail || !head || !*tail || !*head || !(*head)->next)
+		return ;
+	current = *tail;
+	while (!current)
 	{
-		sign = -1;
-		str++;
+		change = current->prev;
+		current->prev = current->next;
+		current->next = change;
+		current = change;
 	}
-	else if (*str == '+')
-		str++;
-	while (*str && *str >= '0' && *str <= '9')
-		res = 10 * res - '0' + *str++;
-	if (!*str)
-		return (res * sign);
-	g_error = 2;
-	return (0);
+	change = *tail;
+	*tail = *head;
+	*head = change;
 }

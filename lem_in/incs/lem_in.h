@@ -16,41 +16,64 @@
 # include "libft.h"
 # include <limits.h>
 
-typedef struct	s_graph
+# define MIN_VISITERS 2
+
+# define PATH_TO_VISIT(list) (g_table_visit[(list)->content_size])
+# define PATH_LEN(list) (g_table_lens[(list)->content_size])
+# define PATH_CROSS(list) (g_table_crossed[(list)->content_size])
+# define IF_E(M, ni, N, sum) ((M) > (ni) * (N) - (sum))
+# define GET_E_DIV(M, N, sum) (((M) + (sum)) / (N))
+# define GET_E_MOD(M, N, sum) (((M) + (sum)) % (N))
+
+typedef struct		s_graph
 {
-	char		*name;
-	int			coord_x;
-	int			coord_y;
-	t_list		*neighs;
-	int			dist;
-	char		visited;//0 - not visited,  -1 - direct visit, 1..n - visited how many time
-	struct s_graph	*from; //where from come to this node
-//	int			ant;
-}				t_graph;
+	char			*name;
+	int				coord_x;
+	int				coord_y;
+	t_list			*neighs;
+	int				visited;
+	int				detected;
+	struct s_graph	*from;
+}					t_graph;
 
-t_list			*g_all_nodes;
+int					g_num_ants;
+t_list				*g_all_nodes;
+t_graph				*g_start_node;
+t_graph				*g_end_node;
 
+int					g_total_path_len;
+int					g_min_effic;
+t_list				*g_path_effic;
+t_list				**g_table_crossed;
+int					*g_table_lens;
+char				*g_table_visit;
 
-t_graph			*g_start_node;
-t_graph			*g_end_node;
+t_list				*g_input;
 
-t_linlist		*g_list_head;
-t_linlist		*g_list_tail;
+int					g_error;
 
+int					g_min_popular;
+t_list				*g_all_paths;
 
-int				g_error;
+t_list				**g_where_go;
+int					*g_waiting_time;
 
-int				g_min_popular; //обновлять каждый цикл
-t_list			*g_popular_nodes;
-int 			g_num_ants;
+void				main_read(void);
+t_graph				*graph_new_el(char *name, int x, int y);
+int					graph_cmp(void *g1, void *line);
+void				graph_del_el(void *el, size_t len);
+void				detect_paths(t_graph *where, int is_reverse);
+void				define_link(char *name1, char *name2);
 
-void			main_read(void);
-t_graph			*graph_new_el(char *name, int x, int y);
-int				graph_cmp(void *g1, void *line);
-void			graph_del_el(void *el, size_t len);
-void			define_link(char *name1, char *name2);
+void				main_bfs(t_graph *start, t_graph *end);
+void				main_efficiency(void);
+void				main_rec(void);
+void				main_print(void);
+int					is_special_case(void);
+void				main_special(void);
 
-//del
-int				atoi_correct(const char *str);
+int					formula_efficience(int ants, int amount, int sum);
+int					atoi_correct(const char *str);
+void				graph_del_node(void *el, size_t len);
 
 #endif

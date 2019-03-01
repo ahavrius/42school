@@ -27,9 +27,9 @@ t_graph		*graph_new_el(char *name, int x, int y)
 	new_graph->coord_x = x;
 	new_graph->coord_y = y;
 	new_graph->neighs = NULL;
-	new_graph->dist = INT_MAX;
 	new_graph->visited = 0;
 	new_graph->from = NULL;
+	new_graph->detected = 0;
 	return (new_graph);
 }
 
@@ -40,7 +40,7 @@ int			graph_cmp(void *g1, void *line)
 	return (!ft_strcmp(((t_graph *)g1)->name, (char *)line));
 }
 
-void		graph_del_el(void *el, size_t len)
+void		graph_del_node(void *el, size_t len)
 {
 	t_graph		*elem;
 
@@ -48,6 +48,7 @@ void		graph_del_el(void *el, size_t len)
 	if (elem)
 	{
 		free(elem->name);
+		ft_lstdel(&elem->neighs, NULL);
 		free(elem);
 	}
 }

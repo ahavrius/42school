@@ -26,7 +26,7 @@ static int	skip_comments(char **input)
 				((*input)[0] == '#' && (*input)[1] == '#'
 			&& ft_strcmp(*input, "##start") && ft_strcmp(*input, "##end"))))
 		{
-			free(*input);
+			ft_lstadd(&g_input, ft_lstnew_link(*input, 1));
 			*input = NULL;
 			len = get_next_line(0, input);
 		}
@@ -77,16 +77,16 @@ static void	parse_start_end(char *input)
 	if (ft_strcmp(input, "##start") && ft_strcmp(input, "##end"))
 		return ;
 	skip_comments(&input_2);
+	ft_lstadd(&g_input, ft_lstnew_link(input_2, 1));
 	if (try_parse_node(input_2) == 1 && g_error == 0)
 	{
 		g_start_node = (!ft_strcmp(input, "##start")) ?
-						g_all_nodes->content : NULL;
+						g_all_nodes->content : g_start_node;
 		g_end_node = (!ft_strcmp(input, "##end")) ?
-						g_all_nodes->content : NULL;
+						g_all_nodes->content : g_end_node;
 	}
 	else
 		g_error = 8;
-	free(input_2);
 }
 
 void		main_read(void)
@@ -100,16 +100,17 @@ void		main_read(void)
 	if (g_error == 0)
 	{
 		g_num_ants = atoi_correct(input);
-		free(input);
+		g_error = 2 * (g_num_ants == 0);
+		ft_lstadd(&g_input, ft_lstnew_link(input, 1));
 	}
 	while (skip_comments(&input) > 0 && g_error == 0)
 	{
+		ft_lstadd(&g_input, ft_lstnew_link(input, 1));
 		if (input[0] == '\0' || input[0] == 'L')
 			g_error = 3;
 		else if (input[0] == '#' && input[1] == '#')
 			parse_start_end(input);
 		else if (try_parse_link(input) + try_parse_node(input) == 0)
 			g_error = (g_error == 0) ? 5 : g_error;
-		free(input);
 	}
 }

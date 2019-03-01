@@ -13,6 +13,8 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# include "libmodf.h"
+# include "libftprintf.h"
 # include <string.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -96,9 +98,13 @@ t_list				*ft_lstnew(void const *content, size_t content_size);
 void				ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstadd(t_list **alst, t_list *new);
-void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
-void				ft_lstiter2(t_list **lst, void (*f)(t_list **elem));
+void				ft_lstiter(t_list *lst, void (*f)(t_list *));
+void				ft_lstiter2(t_list *lst, void *param,
+									void (*f)(t_list *, void *));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
+t_list				*ft_lstmap_link(t_list *lst, t_list *(*f)(t_list *elem));
+t_list				*ft_lstsort(t_list *lst, int (*cmp)(t_list *, t_list *));
+t_list				*ft_lstcopy(t_list *lst);
 
 t_list				*ft_lstnew_link(void *content, size_t content_size);
 t_list				*ft_lst_reverse(t_list *head);
